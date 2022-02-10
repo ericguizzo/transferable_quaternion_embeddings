@@ -1,0 +1,39 @@
+{
+  "global_parameters":{
+        "gpu_id":1,
+        "experiment_description": "coglione",
+        "script": "training_autoencoder_simple.py",
+        "dataset": "iemocap",
+        "num_experiment": 15,
+        "num_folds": 1,
+        "num_epochs": 200000,
+        "learning_rate": 0.001,
+        "batch_size": 50,
+        "fast_test": "False",
+        "patience": 100,
+        "regularization_lambda": 0.00,
+        "model_quat": "True",
+        "model_classifier_quat": "True"
+      },
+
+  "1":{"comment_1": "r2he", "comment_2": "batchnorm",
+       "loss_beta": 0, "save_model_metric": "total_loss", "early_stopping": "True",
+       "time_dim":512, "model_name": "r2he",
+       "model_batch_normalization":"True"
+        },
+  "2":{"comment_1": "r2he", "comment_2": "no_batchnorm",
+       "loss_beta": 0, "save_model_metric": "total_loss", "early_stopping": "True",
+       "time_dim":512, "model_name": "r2he",
+       "model_batch_normalization":"False"
+        },
+  "3":{"comment_1": "simple_autoencoder", "comment_2": "batchnorm",
+       "loss_beta": 0, "save_model_metric": "total_loss", "early_stopping": "True",
+       "time_dim":512, "model_name": "simple_autoencoder",
+       "model_batch_normalization":"True"
+        },
+  "4":{"comment_1": "simple_autoencoder", "comment_2": "no_batchnorm",
+       "loss_beta": 0, "save_model_metric": "total_loss", "early_stopping": "True",
+       "time_dim":512, "model_name": "simple_autoencoder",
+       "model_batch_normalization":"False"
+        }
+}

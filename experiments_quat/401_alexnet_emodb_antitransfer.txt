@@ -1,0 +1,66 @@
+{
+  "global_parameters":{
+        "gpu_id":1,
+        "experiment_description": "testing_vgg",
+        "script": "training_emotion_recognition.py",
+        "dataset": "emodb",
+        "predictors_path": "'../dataset/matrices/emodb_randsplit_spectrum_fast_predictors.npy'",
+        "target_path": "'../dataset/matrices/emodb_randsplit_spectrum_fast_target.npy'",
+        "model_num_classes": 7,
+        "num_experiment": 24,
+        "num_folds": 1,
+        "num_epochs": 500,
+        "batch_size": 20,
+        "model_name": "AlexNet",
+        "fast_test": "False",
+        "shuffle_data": "False",
+        "patience": 20,
+        "save_model_metric": "loss",
+        "early_stopping": "True",
+        "time_dim":512,
+        "spreadsheet_profile": "profile_emotion_recognition"
+      },
+
+        "1":{"comment_1": "ablation", "comment_2": "only_reconstruction",
+              "use_r2he":"True",
+              "model_quat":"True",
+              "r2he_features_type":"embeddings",
+              "model_flatten_dim":2048,
+              "learning_rate": 0.00001,
+              "r2he_model_path": "'../new_experiments/experiment_315_DACCAPO_pretraining_reconstruction.txt/models/model_xval_iemocap_exp315_DACCAPO_pretraining_reconstruction.txt_run1_fold0'"
+              },
+        "2":{"comment_1": "ablation", "comment_2": "no_recon_only_classification",
+              "use_r2he":"True",
+              "model_quat":"True",
+              "r2he_features_type":"embeddings",
+              "model_flatten_dim":2048,
+              "learning_rate": 0.00001,
+              "r2he_model_path": "'../new_experiments/experiment_315_DACCAPO_pretraining_reconstruction.txt/models/model_xval_iemocap_exp315_DACCAPO_pretraining_reconstruction.txt_run5_fold0'"
+              },
+        "3":{"comment_1": "ablation", "comment_2": "recon_only_discrete_class",
+              "use_r2he":"True",
+              "model_quat":"True",
+              "r2he_features_type":"embeddings",
+              "model_flatten_dim":2048,
+              "learning_rate": 0.00001,
+              "r2he_model_path": "'../new_experiments/experiment_323_DACCAPO_betagrid_RIPARTO.txt/models/model_xval_iemocap_exp323_DACCAPO_betagrid_RIPARTO.txt_run15_fold0'"
+              },
+        "4":{"comment_1": "ablation", "comment_2": "recon_only_vad",
+              "use_r2he":"True",
+              "model_quat":"True",
+              "r2he_features_type":"embeddings",
+              "model_flatten_dim":2048,
+              "learning_rate": 0.00001,
+              "r2he_model_path": "'../new_experiments/experiment_323_DACCAPO_betagrid_RIPARTO.txt/models/model_xval_iemocap_exp323_DACCAPO_betagrid_RIPARTO.txt_run16_fold0'"
+              },
+        "5":{"comment_1": "ablation", "comment_2": "real_model",
+              "use_r2he":"True",
+              "model_quat":"True",
+              "r2he_features_type":"embeddings",
+              "model_flatten_dim":2048,
+              "learning_rate": 0.00001,
+              "r2he_quat": "False",
+              "r2he_model_path": "'../new_experiments/experiment_323_DACCAPO_betagrid_RIPARTO.txt/models/model_xval_iemocap_exp323_DACCAPO_betagrid_RIPARTO.txt_run14_fold0'"
+              }
+
+}

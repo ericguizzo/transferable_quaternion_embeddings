@@ -1,0 +1,42 @@
+DA FARE NEL CODICE:
+
+ESPERIMENTI:
+prove R2Hemo:
+- togliere batchnorm: non funziona, in output sempre un solo canale ha tutta l'informazione. non é la batchnorm
+- mettere piú canali nei conv layers: pare funzionare con 16,32, un canale é comunque bianco in uscita
+- mettere ancora piú canali nei conv layer (16,32,64) - non va (va come la versione )
+- messo sigmoid su ultimo conv -- sputtana tutto
+- mettere layer con 128 canali invece che 4 sembra funzionare! ma cosí l'embedding é troppo grande
+
+ABLATION STUDIEs:
+- provare R2Hemo real, r2hemo senza classification e r2hemo senza reconstruction
+
+PAPER:
+- aggiungere introduzione e cambiare il paragrafo intro in background
+- aggiungere sezione discussion con ablation studies
+- spostare descrizione degli output con plot in sezione discussion
+- aggiungere una colonna su method
+- aggiungere una colonna su literature review
+- abstract e conclusions
+
+
+
+TO DO::: urgente
+- rendere training riproducibile:
+- ablation study con 100, 50, 20, 10, 5, 2 campioni in train/val
+- ablation study: quad pretrained: se non migliora vuol dire che r2hemo contiene giá informazioni del pretraining
+
+
+NUOVI:
+- FORSE riorganizzare tabelle: una pre non-pre, una per pre
+- rifare l'immagine dell'ablation study
+- completare diagramma esperimenti
+- riscrivere analisi risultati in base ai dati nuovi 
+- rifare ablation study riducendo dati
+- mettere tabella con risultati pretraining si IEMOCAP di tutte le reti
+- fare ablation study: riportare risultati di r2hemo con fixed weights
+- fare ablation study: r2hemo senza pretraining
+- agiungere literature
+- paragrafo discussion
+- spiegare "un po' meglio nel capitolo method"
+- abstract e conclusions

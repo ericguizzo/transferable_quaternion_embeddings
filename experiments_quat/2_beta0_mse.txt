@@ -1,0 +1,21 @@
+{
+  "global_parameters":{
+        "gpu_id":1,
+        "experiment_description": "no_beta_mseloss",
+        "script": "training_autoencoder.py",
+        "dataset": "iemocap",
+        "num_experiment": 0,
+        "num_folds": 1,
+        "num_epochs": 2000,
+        "learning_rate": 0.00005,
+        "batch_size": 4,
+        "model_name": "r2he",
+        "fast_test": "False",
+        "patience": 100
+      },
+
+  "1":{"comment_1": "beta_0", "comment_2": "no_emo",
+       "loss_beta": 0
+        }
+
+}
