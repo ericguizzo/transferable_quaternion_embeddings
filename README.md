@@ -10,6 +10,7 @@ To install all required dependencies run:
 pip install -r requirements.txt
 ```
 
+
 ## Data download and preprocessing
 * Follow these instructions to download the dataset: https://sail.usc.edu/iemocap/
 * Run the following scripts to pre-process the dataset:
@@ -19,8 +20,13 @@ python3 preprocessing_IEMOCAP.py
 
 It is possible to download our pre-trained R2Hemo weights with this command:
 ```bash
-python download_weights.py --task 1 --output_path models/
+python download_weights.py --output_path models/
 ```
 These weights are also available for manual download [here](https://drive.google.com/file/d/1vCX0KHW44Q9plKTdkgyKZRcyjfgVA7jX/view?usp=sharing).
+
+If you use our pretrained skip the following section.
+
+
+## R2Hemo pretraining
 
 WORK IN PROGRESS...
