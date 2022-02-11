@@ -29,10 +29,14 @@ If you use our pretrained skip the following section.
 
 
 ## R2Hemo pretraining
-Once downloaded and preprocessed Iemocap it is possible to run the R2Hemo pretraining from scratch with this commend:
+Once downloaded and preprocessed Iemocap it is possible to run the R2Hemo pretraining from scratch with this command:
 ```bash
 python3 exp_instance.py --ids [1] --gpu_id 0
 ```
 This script will run the training script *training_R2Hemo.py* with the hyperparameters specified in the configuration file *experiments/1_R2Hemo_train_onlyrecon.txt*.
+Two consecutive trainings are launched: without and with the emotion classification term in the loss function. When the trainings finish, a metrics spreadsheet is saved in *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
+
+
+## Method application
 
 WORK IN PROGRESS...
