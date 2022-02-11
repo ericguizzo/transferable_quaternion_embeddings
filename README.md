@@ -29,7 +29,10 @@ If you use our pretrained skip the following section.
 
 
 ## R2Hemo pretraining
-To run the R2Hemo pretraining
-
+Once downloaded and preprocessed Iemocap it is possible to run the R2Hemo pretraining from scratch with this commend:
+```bash
+python3 exp_instance.py --ids [1] --gpu_id 0
+```
+This script will run the training script *training_R2Hemo.py* with the hyperparameters specified in the configuration file *experiments/1_R2Hemo_train_onlyrecon.txt*.
 
 WORK IN PROGRESS...
