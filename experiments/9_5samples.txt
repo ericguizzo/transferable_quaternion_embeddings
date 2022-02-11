@@ -1,0 +1,22 @@
+{
+  "global_parameters":{
+        "gpu_id":1,
+        "experiment_description": "no_beta_no_batchnorm_fasetest",
+        "script": "training_autoencoder_simple.py",
+        "dataset": "iemocap",
+        "num_experiment": 4,
+        "num_folds": 1,
+        "num_epochs": 200000,
+        "learning_rate": 0.005,
+        "batch_size": 20,
+        "model_name": "simple_autoencoder",
+        "fast_test": "False",
+        "patience": 100
+      },
+
+  "1":{"comment_1": "beta_0", "comment_2": "no_batchnorm_fasttest",
+       "loss_beta": 0, "save_model_metric": "total_loss", "early_stopping": "True",
+       "model_architecture":"VGG16", "time_dim":512, "model_quat": "True"
+        }
+
+}
