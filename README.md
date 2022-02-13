@@ -46,7 +46,7 @@ from models import *
 
 quaternion_processing = True
 
-model = resnet50(quat=quaternion)
+model = resnet50(quat=quaternion_processing)
 if quaternion_processing:
     r2he = simple_autoencoder_2_vad()
     r2he.load_state_dict(pretrained_dict_r2he, strict=False)
@@ -54,19 +54,13 @@ if quaternion_processing:
 for e in epochs:
   for i, (sounds, truth) in enumerate(dataloader):
         optimizer.zero_grad()
-
-        #generate quaternion emotional embeddings if desired
         if quaternion_processing:
             with torch.no_grad():
                 sounds, _, _, _, _ = r2he.get_embeddings(sounds)
-
-
         pred = model(sounds)
-
         loss = loss_function(pred, truth)
         loss.backward()
         optimizer.step()
-
 ```
 
 WORK IN PROGRESS...
