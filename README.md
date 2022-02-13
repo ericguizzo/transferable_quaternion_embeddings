@@ -33,10 +33,11 @@ Once downloaded and preprocessed Iemocap it is possible to run the R2Hemo pretra
 ```bash
 python3 exp_instance.py --ids [1] --gpu_id 0
 ```
-This script will run the training script *training_R2Hemo.py* with the hyperparameters specified in the configuration file *experiments/1_R2Hemo_train_onlyrecon.txt*.
-Two consecutive trainings are launched: without and with the emotion classification term in the loss function. When the trainings finish, a metrics spreadsheet is saved in *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
+This script will run the training *training_R2Hemo.py* with the hyperparameters specified in the configuration file *experiments/1_R2Hemo_train_onlyrecon.txt*.
+Two consecutive trainings are launched: without and with the emotion classification term in the loss function. When the trainings finishes, a metrics spreadsheet is saved in *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
 
 
 ## Method application
+With a pretrained R2Hemo network it is possible to use quaternion-valued networks for speech emotion recognition starting from monoaural spectrograms. It is sufficient to call the function ```get_embeddings()``` on a pretrained R2Hemo as a preprocessing step before the forward propagation. We provide quaternion implementations of the *AlexNet*, *ResNet50* and *VGG16* networks.
 
 WORK IN PROGRESS...
