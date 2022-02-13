@@ -25,7 +25,7 @@ python3 download_weights.py --output_path models/
 ```
 These weights are also available for manual download [here](https://drive.google.com/file/d/1vCX0KHW44Q9plKTdkgyKZRcyjfgVA7jX/view?usp=sharing).
 
-If you use our pretrained skip the following section.
+If you use our pretrained weights skip the following section.
 
 
 ## R2Hemo pretraining
