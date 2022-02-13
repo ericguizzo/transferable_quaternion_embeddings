@@ -42,7 +42,7 @@ With a pretrained R2Hemo network it is possible to use quaternion-valued network
 An example in pseudocode:
 ```python3
 import torch
-import models
+from models import *
 
 quaternion_processing = True
 
