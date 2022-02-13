@@ -63,4 +63,8 @@ for e in epochs:
         optimizer.step()
 ```
 
-WORK IN PROGRESS...
+You can run our speech emotion recognition training on Iemocap with this line:
+```bash
+python3 exp_instance.py --ids [2] --gpu_id 0 --last 3
+```
+The script will launch 3 consecutive trainings using the quaternionAlexNet, ResNet50 and VGG16 with Iemocap and will return a metrics spreadsheet that can be fount at *path_to_spreadsheet*.
