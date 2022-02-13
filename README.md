@@ -39,5 +39,34 @@ Two consecutive trainings are launched: without and with the emotion classificat
 
 ## Method application
 With a pretrained R2Hemo network it is possible to use quaternion-valued networks for speech emotion recognition starting from monoaural spectrograms. It is sufficient to call the function ```get_embeddings()``` on a pretrained R2Hemo as a preprocessing step before the forward propagation. We provide quaternion implementations of the *AlexNet*, *ResNet50* and *VGG16* networks.
+An example in pseudocode:
+```python3
+import torch
+import models
+
+quaternion_processing = True
+
+model = resnet50(quat=quaternion)
+if quaternion_processing:
+    r2he = simple_autoencoder_2_vad()
+    r2he.load_state_dict(pretrained_dict_r2he, strict=False)
+
+for e in epochs:
+  for i, (sounds, truth) in enumerate(dataloader):
+        optimizer.zero_grad()
+
+        #generate quaternion emotional embeddings if desired
+        if quaternion_processing:
+            with torch.no_grad():
+                sounds, _, _, _, _ = r2he.get_embeddings(sounds)
+
+
+        pred = model(sounds)
+
+        loss = loss_function(pred, truth)
+        loss.backward()
+        optimizer.step()
+
+```
 
 WORK IN PROGRESS...
