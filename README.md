@@ -33,8 +33,8 @@ Once downloaded and preprocessed Iemocap it is possible to run the R2Hemo pretra
 ```bash
 python3 exp_instance.py --ids [1] --gpu_id 0
 ```
-This script will run the training *training_R2Hemo.py* with the hyperparameters specified in the configuration file *experiments/1_R2Hemo_train_onlyrecon.txt*.
-Two consecutive trainings are launched: without and with the emotion classification term in the loss function. When the trainings finishes, a metrics spreadsheet is saved in *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
+This script will run the training *training_R2Hemo.py* with our best hyperparameters, which are specified in the configuration file *experiments/1_R2Hemo_train_onlyrecon.txt*.
+Two consecutive trainings are launched: without and with the emotion classification term in the loss function, as explained in the paper. When the trainings finish, a metrics spreadsheet is saved in *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
 
 
 ## Method application
@@ -67,4 +67,4 @@ You can run our speech emotion recognition training on Iemocap with this line:
 ```bash
 python3 exp_instance.py --ids [2] --gpu_id 0 --last 3
 ```
-The script will launch 3 consecutive trainings using the quaternionAlexNet, ResNet50 and VGG16 with Iemocap and will return a metrics spreadsheet that can be fount at *path_to_spreadsheet*.
+The script will launch 3 consecutive trainings using the quaternionAlexNet, ResNet50 and VGG16 with Iemocap and will return a metrics spreadsheet that can be fount at *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
