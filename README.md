@@ -13,6 +13,7 @@ pip install -r requirements.txt
 
 ## Data download and preprocessing
 * Follow these instructions to download the Iemocap dataset: https://sail.usc.edu/iemocap/
+* Put the path to the downloaded dataset in the *input_iemocap_folder* variable in the *preprocessing_config.ini* file.
 * Run the following scripts to pre-process the dataset:
 ```bash
 python3 preprocessing_IEMOCAP_vad.py

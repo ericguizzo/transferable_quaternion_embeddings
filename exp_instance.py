@@ -214,8 +214,6 @@ def grid_search(experiments_folder, output_folder, ids, begin, end, gpu_id):
     print ('\nALL EXPERIMENTS REQUESTED COMPLETED')
 
 
-
-
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
