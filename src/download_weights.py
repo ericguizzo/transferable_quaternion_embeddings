@@ -5,7 +5,7 @@ import requests
 from tqdm import tqdm
 
 '''
-Download our R2Hemo pre-trained weights
+Download our RH-emo pre-trained weights
 Command line arguments define which task to download and where to put the checkpoint file.
 '''
 
@@ -48,12 +48,12 @@ if __name__ == "__main__":
     parser.add_argument('--output_path', type=str, default="models")
     args = parser.parse_args()
 
-    file_id = '1vCX0KHW44Q9plKTdkgyKZRcyjfgVA7jX'
-
+    #file_id = '1vCX0KHW44Q9plKTdkgyKZRcyjfgVA7jX'
+    file_id = '1gno2EONz2q9aPENkztIxcTkRdrXw3CkJ'
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
 
-    output_path = os.path.join(args.output_path, "pretrained_R2Hemo")
+    output_path = os.path.join(args.output_path, "pretrained_RHemo")
 
     download_file_from_google_drive(file_id, output_path)
 
