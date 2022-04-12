@@ -234,7 +234,7 @@ def main():
     sounds_list = filter_labels(sounds_list, label_to_int)
     print ("N sounds: ", len(sounds_list))
     index = 1  #index for progress bar
-    sounds_list = sounds_list[:10]
+    #sounds_list = sounds_list[:10]
 
     num_files = len(sounds_list)
     predictors = {}
@@ -258,7 +258,7 @@ def main():
     label_to_int = label_to_int_filtered
     sounds_list = filter_labels(sounds_list, label_to_int)
     print ("N sounds: ", len(sounds_list))
-    sounds_list = sounds_list[:10]
+    #sounds_list = sounds_list[:10]
 
     index = 1  #index for progress bar
     predictors = {}
