@@ -221,21 +221,21 @@ def main():
         max_file_length = 1
     else:
         max_file_length=get_max_length_IEMOCAP(sounds_list)  #get longest file in samples
-    print (sounds_list)
 
-    predictors_save_path_completeVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_completeVAD' + '_predictors.npy')
+    predictors_save_path_complete = os.path.join(OUTPUT_FOLDER, 'iemocap_complete' + '_predictors.npy')
+    predictors_save_path_filtered = os.path.join(OUTPUT_FOLDER, 'iemocap_filtered' + '_predictors.npy')
     target_save_path_completeVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_completeVAD'  + '_target.npy')
-    predictors_save_path_filteredVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_filteredVAD' + '_predictors.npy')
     target_save_path_filteredVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_filteredVAD'  + '_target.npy')
-    predictors_save_path_classification = os.path.join(OUTPUT_FOLDER, 'iemocap_classification' + '_predictors.npy')
-    target_save_path_classification = os.path.join(OUTPUT_FOLDER, 'iemocap_classification'  + '_target.npy')
+    target_save_path_filteredCL = os.path.join(OUTPUT_FOLDER, 'iemocap_classification'  + '_target.npy')
 
     print ('\nPreprocessing files: Complete VAD')
 
     label_to_int = label_to_int_complete
     sounds_list = filter_labels(sounds_list, label_to_int)
-    index = 1  #index for progress bar
     print ("N sounds: ", len(sounds_list))
+    index = 1  #index for progress bar
+    sounds_list = sounds_list[:10]
+
     num_files = len(sounds_list)
     predictors = {}
     target = {}
@@ -250,35 +250,41 @@ def main():
         index +=1
     #save dicts
     print ('\nSaving matrices...')
-    np.save(predictors_save_path_completeVAD, predictors)
+    np.save(predictors_save_path_complete, predictors)
     np.save(target_save_path_completeVAD, target)
     print_dims(predictors, target)
-    '''
+
     print ('\nPreprocessing files: Filtered VAD')
     label_to_int = label_to_int_filtered
-    sounds_list = filter_labels(sounds_list)  #filter only sounds of certain labels !!!!!
-    num_files = len(sounds_list)
+    sounds_list = filter_labels(sounds_list, label_to_int)
+    print ("N sounds: ", len(sounds_list))
+    sounds_list = sounds_list[:10]
+
+    index = 1  #index for progress bar
     predictors = {}
-    target = {}
+    target_vad = {}
+    target_cl = {}
     index = 1  #index for progress bar
     for i in sounds_list:
         curr_list = [i]
-        curr_predictors, curr_target = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP)
+        curr_predictors, curr_target_vad = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP, label_to_int)
+        _, curr_target_cl = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP_classification, label_to_int)
+
         #append preprocessed predictors and target to the dict
         if curr_predictors.shape[0] != 0:
             predictors[i] = curr_predictors
-            target[i] = curr_target
+            target_vad[i] = curr_target_vad
+            target_cl[i] = curr_target_cl
         uf.print_bar(index, num_files)
         index +=1
     #save dicts
     print ('\nSaving matrices...')
-    np.save(predictors_save_path, predictors)
-    np.save(target_save_path, target)
-    print_dims(predictors, target)
+    np.save(predictors_save_path_filtered, predictors)
+    np.save(target_save_path_filteredVAD, target_vad)
+    np.save(target_save_path_filteredCL, target_cl)
+    print_dims(predictors, target_vad)
 
 
-    sounds_list = filter_labels(sounds_list)  #filter only sounds of certain labels
-    '''
 
 
 
