@@ -21,7 +21,7 @@ python3 preprocessing.py
 
 It is possible to download our pre-trained RH-emo weights with this command:
 ```bash
-python3 download_weights.py --output_path models/
+python3 download_weights.py
 ```
 These weights are also available for manual download [here](https://drive.google.com/file/d/1vCX0KHW44Q9plKTdkgyKZRcyjfgVA7jX/view?usp=sharing).
 
