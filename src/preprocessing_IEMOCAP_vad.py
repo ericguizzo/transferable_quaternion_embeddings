@@ -66,7 +66,7 @@ label_to_int_complete = {'neu':0,
                 'dis':4,
                 'oth':4,
                 'xxx':4}
-
+label_to_int = {}
 
 wavname = 'Ses01F_impro01_F001.wav'
 #wavname = 'Ses01M_script01_2_F003.wav'
@@ -235,6 +235,7 @@ def main():
 
     print ('\nPreprocessing files: Complete VAD')
     label_to_int = label_to_int_complete
+
     sounds_list = filter_labels(sounds_list)
     index = 1  #index for progress bar
     num_files = len(sounds_list)
