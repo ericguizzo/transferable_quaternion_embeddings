@@ -9,3 +9,4 @@ torch==1.7.1
 torchvision==0.2.2.post3
 tqdm
 xlsxwriter==1.1.5
+gdown==4.1.1

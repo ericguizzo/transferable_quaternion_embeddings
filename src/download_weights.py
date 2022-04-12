@@ -23,4 +23,4 @@ if __name__ == "__main__":
 
     gdown.download(id=file_id, output=output_path, quiet=False)
 
-    #print ('Pre-trained weights successfully downloaded')
+    print ('Pre-trained weights successfully downloaded')
