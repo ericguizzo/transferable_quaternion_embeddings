@@ -47,7 +47,7 @@ parser.add_argument('--patience', type=int, default=100)
 parser.add_argument('--load_pretrained', type=str, default=None)
 parser.add_argument('--num_folds', type=int, default=1)
 parser.add_argument('--num_fold', type=int, default=0)
-parser.add_argument('--fixed_seed', type=str, default=1)
+parser.add_argument('--fixed_seed', type=str, default="1")
 
 
 #loss parameters
