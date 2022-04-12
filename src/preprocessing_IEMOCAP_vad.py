@@ -44,7 +44,7 @@ print ('Features type: ' + str(FEATURES_TYPE))
 num_classes_IEMOCAP = 5
 
 
-label_to_int = {'neu':0,
+label_to_int_filtered = {'neu':0,
                 'ang':1,
                 'hap':2,
                 'exc':None,
@@ -66,7 +66,6 @@ label_to_int_complete = {'neu':0,
                 'dis':4,
                 'oth':4,
                 'xxx':4}
-#label_to_int = {}
 
 wavname = 'Ses01F_impro01_F001.wav'
 #wavname = 'Ses01M_script01_2_F003.wav'
@@ -80,7 +79,7 @@ def get_max_length_IEMOCAP(input_list):
 
     return max_file_length
 
-def get_label_IEMOCAP(wavname):
+def get_label_IEMOCAP(wavname, label_to_int_dict):
     '''
     compute one hot label starting from wav filename
     '''
@@ -106,13 +105,13 @@ def get_label_IEMOCAP(wavname):
 
 
     str_class_label = list(filter(lambda x: ID in x, contents))[0].split('\t')[2]
-    class_label = label_to_int[str_class_label]
+    class_label = label_to_int_dict[str_class_label]
 
     output = np.array([class_label, v, a, d])
 
     return output
 
-def get_label_IEMOCAP_classification(wavname):
+def get_label_IEMOCAP_classification(wavname, label_to_int_dict):
     '''
     compute one hot label starting from wav filename
     '''
@@ -130,7 +129,7 @@ def get_label_IEMOCAP_classification(wavname):
 
     #change this to have only 4 labels!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    int_label = label_to_int_filtered[str_label]
+    int_label = label_to_int_dict[str_label]
 
     if int_label != None:
         output = uf.onehot(int_label, num_classes_IEMOCAP)
@@ -161,14 +160,14 @@ def get_sounds_list(input_folder=INPUT_IEMOCAP_FOLDER):
 
     return paths
 
-def filter_labels(sounds_list):
+def filter_labels(sounds_list, label_to_int_dict):
     '''
     filter only sounds that are in the
     selected label_to_int dict
     '''
     filtered_list = []
     for sound in sounds_list:
-        label = get_label_IEMOCAP_classification(sound)
+        label = get_label_IEMOCAP_classification(sound, label_to_int_dict)
         if type(label) == np.ndarray:  #if not none
             filtered_list.append(sound)
 
@@ -232,9 +231,9 @@ def main():
     target_save_path_classification = os.path.join(OUTPUT_FOLDER, 'iemocap_classification'  + '_target.npy')
 
     print ('\nPreprocessing files: Complete VAD')
-    #label_to_int = label_to_int_complete
 
-    sounds_list = filter_labels(sounds_list)
+    label_to_int = label_to_int_complete
+    sounds_list = filter_labels(sounds_list, label_to_int)
     index = 1  #index for progress bar
     print ("N sounds: ", len(sounds_list))
     num_files = len(sounds_list)
@@ -242,7 +241,7 @@ def main():
     target = {}
     for i in sounds_list:
         curr_list = [i]
-        curr_predictors, curr_target = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP)
+        curr_predictors, curr_target = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP, label_to_int)
         #append preprocessed predictors and target to the dict
         if curr_predictors.shape[0] != 0:
             predictors[i] = curr_predictors

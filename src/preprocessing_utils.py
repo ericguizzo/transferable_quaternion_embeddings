@@ -229,7 +229,7 @@ def segment_datapoint(features, label):
 
     return predictors, target
 
-def preprocess_foldable_item(sounds_list, max_file_length, get_label_function, print_item_progress=False):
+def preprocess_foldable_item(sounds_list, max_file_length, get_label_function, label_to_int_dict, print_item_progress=False):
     '''
     compute predictors and target of all sounds in sound list
     sound_list should contain all filenames of 1 single foldable item
@@ -259,7 +259,7 @@ def preprocess_foldable_item(sounds_list, max_file_length, get_label_function, p
     index_ = 0
     for sound_file in sounds_list:
         try:
-            label = get_label_function(sound_file)
+            label = get_label_function(sound_file, label_to_int_dict)
             #print (sound_file)
             samples, sr = librosa.core.load(sound_file, sr=librosa_SR)  #read audio
             #print (len(samples))
