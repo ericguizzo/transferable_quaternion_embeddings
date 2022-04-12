@@ -1,8 +1,8 @@
 {
   "global_parameters":{
         "gpu_id":1,
-        "experiment_description": "R2Hemo_pretraining",
-        "script": "training_R2Hemo.py",
+        "experiment_description": "RHemo_pretraining",
+        "script": "training_RHemo.py",
         "dataset": "iemocap",
         "num_experiment": 1,
         "num_folds": 1,
@@ -17,6 +17,8 @@
       },
 
   "1":{"comment_1": "first_run", "comment_2": "pretraining_only_reconstruction",
+       "predictors_path":"../dataset/matrices/iemocap_complete_predictors.npy",
+       "target_path":"../dataset/matrices/iemocap_completeVAD_target.npy",
        "loss_beta": 0,
        "batch_size": 50,
        "learning_rate": 0.001,
@@ -25,6 +27,8 @@
         },
 
   "2":{"comment_1": "second_run", "comment_2": "pretraining_with_emotion",
+       "predictors_path":"../dataset/matrices/iemocap_filtered_predictors.npy",
+       "target_path":"../dataset/matrices/iemocap_filteredVAD_target.npy",
        "loss_beta": 0.01,
        "batch_size": 20,
        "learning_rate": 0.000001,

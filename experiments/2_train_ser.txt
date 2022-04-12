@@ -12,7 +12,7 @@
         "batch_size": 20,
         "fast_test": "False",
         "use_r2he":"True",
-        "r2he_model_path": "'models/pretrained_R2Hemo'",
+        "r2he_model_path": "'models/pretrained_RHemo'",
         "patience": 20,
         "save_model_metric": "loss",
         "early_stopping": "True",
@@ -21,16 +21,18 @@
         "model_flatten_dim":2048,
         "learning_rate": 0.00001,
         "model_quat":"True",
-        "spreadsheet_profile": "profile_emotion_recognition"
+        "spreadsheet_profile": "profile_emotion_recognition",
+        "predictors_path":"../dataset/matrices/iemocap_filtered_predictors.npy",
+        "target_path":"../dataset/matrices/iemocap_filteredCL_target.npy"
       },
 
-      "1":{"comment_1": "OUR", "comment_2": "quat_r2he",
+      "1":{"comment_1": "OUR", "comment_2": "quat_rhe_alexnet",
         "model_name": "AlexNet"
         },
-      "2":{"comment_1": "OUR", "comment_2": "quat_r2he",
+      "2":{"comment_1": "OUR", "comment_2": "quat_rhe_resnet",
         "model_name": "resnet50"
         },
-      "3":{"comment_1": "OUR", "comment_2": "quat_r2he",
+      "3":{"comment_1": "OUR", "comment_2": "quat_r2he_vgg",
         "model_name": "VGGNet"
         }
 }

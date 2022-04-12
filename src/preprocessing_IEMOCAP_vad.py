@@ -232,11 +232,11 @@ def main():
 
     label_to_int = label_to_int_complete
     sounds_list = filter_labels(sounds_list, label_to_int)
-    print ("N sounds: ", len(sounds_list))
-    index = 1  #index for progress bar
+    num_files = len(sounds_list)
+    #print ("N sounds: ", len(sounds_list))
     #sounds_list = sounds_list[:10]
 
-    num_files = len(sounds_list)
+    index = 1  #index for progress bar
     predictors = {}
     target = {}
     for i in sounds_list:
@@ -257,7 +257,8 @@ def main():
     print ('\nPreprocessing files: Filtered VAD and classification matrices')
     label_to_int = label_to_int_filtered
     sounds_list = filter_labels(sounds_list, label_to_int)
-    print ("N sounds: ", len(sounds_list))
+    num_files = len(sounds_list)
+    #print ("N sounds: ", len(sounds_list))
     #sounds_list = sounds_list[:10]
 
     index = 1  #index for progress bar
