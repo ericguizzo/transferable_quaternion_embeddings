@@ -16,7 +16,7 @@ pip install -r requirements.txt
 * Put the path to the downloaded dataset in the *input_iemocap_folder* variable in the *preprocessing_config.ini* file.
 * Run the following scripts to pre-process the dataset:
 ```bash
-python3 preprocessing_IEMOCAP_vad.py
+python3 preprocessing.py
 ```
 
 It is possible to download our pre-trained RH-emo weights with this command:
