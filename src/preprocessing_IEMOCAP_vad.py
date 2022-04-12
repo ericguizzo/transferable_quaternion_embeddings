@@ -226,9 +226,9 @@ def main():
     predictors_save_path_filtered = os.path.join(OUTPUT_FOLDER, 'iemocap_filtered' + '_predictors.npy')
     target_save_path_completeVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_completeVAD'  + '_target.npy')
     target_save_path_filteredVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_filteredVAD'  + '_target.npy')
-    target_save_path_filteredCL = os.path.join(OUTPUT_FOLDER, 'iemocap_classification'  + '_target.npy')
+    target_save_path_filteredCL = os.path.join(OUTPUT_FOLDER, 'iemocap_filteredCL'  + '_target.npy')
 
-    print ('\nPreprocessing files: Complete VAD')
+    print ('\nPreprocessing files: Complete VAD matrix')
 
     label_to_int = label_to_int_complete
     sounds_list = filter_labels(sounds_list, label_to_int)
@@ -254,7 +254,7 @@ def main():
     np.save(target_save_path_completeVAD, target)
     print_dims(predictors, target)
 
-    print ('\nPreprocessing files: Filtered VAD')
+    print ('\nPreprocessing files: Filtered VAD and classification matrices')
     label_to_int = label_to_int_filtered
     sounds_list = filter_labels(sounds_list, label_to_int)
     print ("N sounds: ", len(sounds_list))
