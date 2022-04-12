@@ -12,7 +12,6 @@ from models import *
 from loss_emo import *
 import utility_functions as uf
 from tqdm import tqdm
-from anti_transfer_loss import ATLoss
 
 parser = argparse.ArgumentParser()
 #saving parameters
@@ -59,14 +58,6 @@ parser.add_argument('--loss_beta_class', type=float, default=1.)
 parser.add_argument('--loss_alpha', type=float, default=1.)
 parser.add_argument('--emo_loss_holes', type=int, default=None)  #emo loss is deactivated every x epochs
 parser.add_argument('--emo_loss_warmup_epochs', type=int, default=None)  #warmup ramp length
-
-#anti-transfer parameters
-parser.add_argument('--anti_transfer_model', type=str, default=None)
-parser.add_argument('--anti_transfer_layer', type=int, default=1)
-parser.add_argument('--anti_transfer_aggregation', type=str, default='gram')
-parser.add_argument('--anti_transfer_distance', type=str, default='cos_squared')
-parser.add_argument('--anti_transfer_beta', type=float, default=1.)
-
 
 #model parameters
 parser.add_argument('--model_name', type=str, default='r2he')
@@ -125,6 +116,8 @@ else:
 #load data loaders
 tr_data, val_data, test_data = uf.load_datasets(args)
 
+AT_term = 0.  #from previous anti-transfer experiments
+
 #load model
 print ('\nMoving model to device')
 if args.model_name == 'r2he':
@@ -177,39 +170,6 @@ if args.load_pretrained is not None:
     #    model.fc1.bias.copy_(state_dict['fc1.bias'])
 
 
-if args.anti_transfer_model is not None:
-    print ('anti-transfer!')
-    #gen model
-    if args.model_name == 'r2he':
-        at_model = locals()[args.model_name](latent_dim=args.model_latent_dim,
-                                          in_channels=args.model_in_channels,
-                                          architecture=args.model_architecture,
-                                          classifier_dropout=args.model_classifier_dropout,
-                                          flattened_dim=args.model_flattened_dim,
-                                          quat=args.model_quat,
-                                          verbose=args.model_verbose)
-    if args.model_name == 'simple_autoencoder':
-        at_model = locals()[args.model_name](quat=False,
-                                          classifier_quat=False)
-    if args.model_name == 'simple_autoencoder_2':
-        at_model = locals()[args.model_name](quat=False,
-                                          classifier_quat=False)
-    if args.model_name == 'simple_autoencoder_2_vad':
-        at_model = locals()[args.model_name](quat=False,
-                                          classifier_quat=False,
-                                          hidden_size=args.model_hidden_size)
-    if args.model_name == 'simple_autoencoder_2_vad_mod':
-        at_model = locals()[args.model_name](quat=False,
-                                          classifier_quat=False,
-                                          hidden_size=args.model_hidden_size)
-    #load weights, cut unused part (decoder and classifier), move to gpu
-    at_pretrained_dict = torch.load(args.anti_transfer_model)
-    at_model.load_state_dict(at_pretrained_dict, strict=False)
-    at_model = at_model.to(device)
-
-    AT = ATLoss(at_model.get_embeddings) #anti-transfer loss class
-
-
 #define optimizer and loss
 optimizer = optim.Adam(model.parameters(), lr=args.learning_rate,
                               weight_decay=args.regularization_lambda)
@@ -234,14 +194,6 @@ def evaluate(model, device, loss_function, dataloader, emo_weight, vad_weight):
             recon, c, v, a, d = model(sounds)
             pred = [c, v, a, d]
 
-            if args.anti_transfer_model is not None:
-                AT_term = AT.loss(sounds,                      #input batch
-                                  model.get_embeddings,       #current model
-                                  beta=args.anti_transfer_beta,                #weight parameter
-                                  aggregation=args.anti_transfer_aggregation,     #channel aggregation
-                                  distance=args.anti_transfer_distance) #distance function
-            else:
-                AT_term = 0.
             loss = loss_function(recon, sounds, truth, pred, emo_weight, vad_weight, beta_class=args.loss_beta_class, alpha=args.loss_alpha, at_term=AT_term)
 
             #loss = loss['total'].cpu().numpy()
@@ -310,14 +262,6 @@ for epoch in range(args.num_epochs):
             recon, c, v, a, d = model(sounds)
             pred = [c, v, a, d]
 
-            if args.anti_transfer_model is not None:
-                AT_term = AT.loss(sounds,                      #input batch
-                                  model.get_embeddings,       #current model
-                                  beta=args.anti_transfer_beta,                #weight parameter
-                                  aggregation=args.anti_transfer_aggregation,     #channel aggregation
-                                  distance=args.anti_transfer_distance) #distance function
-            else:
-                AT_term = 0.
             loss = loss_function(recon, sounds, truth, pred, emo_weight, vad_weight, beta_class=args.loss_beta_class, alpha=args.loss_alpha, at_term=AT_term)
             loss['total'].backward()
             optimizer.step()
