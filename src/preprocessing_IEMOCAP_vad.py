@@ -235,6 +235,7 @@ def main():
 
     print ('\nPreprocessing files: Complete VAD')
     label_to_int = label_to_int_complete
+    sounds_list = filter_labels(sounds_list)
     index = 1  #index for progress bar
     num_files = len(sounds_list)
     predictors = {}
