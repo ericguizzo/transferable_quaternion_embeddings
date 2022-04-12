@@ -13,7 +13,7 @@
         "early_stopping": "True",
         "spreadsheet_profile": "profile_autoencoder_vad",
         "time_dim":512,
-        "model_classifier_quat": "True",
+        "model_classifier_quat": "True"
       },
 
   "1":{"comment_1": "first_run", "comment_2": "pretraining_only_reconstruction",
