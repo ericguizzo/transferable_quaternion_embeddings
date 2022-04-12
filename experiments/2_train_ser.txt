@@ -1,0 +1,36 @@
+{
+  "global_parameters":{
+        "gpu_id":1,
+        "experiment_description": "iemocap_quaternion_trainings",
+        "script": "training_ser.py",
+        "dataset": "iemocap",
+        "predictors_path": "'path_to_predictors'",
+        "target_path": "'path_to_target'",
+        "num_experiment": 24,
+        "num_folds": 1,
+        "num_epochs": 500,
+        "batch_size": 20,
+        "fast_test": "False",
+        "use_r2he":"True",
+        "r2he_model_path": "'models/pretrained_R2Hemo'",
+        "patience": 20,
+        "save_model_metric": "loss",
+        "early_stopping": "True",
+        "time_dim":512,
+        "r2he_features_type":"embeddings",
+        "model_flatten_dim":2048,
+        "learning_rate": 0.00001,
+        "model_quat":"True",
+        "spreadsheet_profile": "profile_emotion_recognition"
+      },
+
+      "1":{"comment_1": "OUR", "comment_2": "quat_r2he",
+        "model_name": "AlexNet"
+        },
+      "2":{"comment_1": "OUR", "comment_2": "quat_r2he",
+        "model_name": "resnet50"
+        },
+      "3":{"comment_1": "OUR", "comment_2": "quat_r2he",
+        "model_name": "VGGNet"
+        }
+}
