@@ -284,6 +284,8 @@ def main():
     np.save(target_save_path_filteredCL, target_cl)
     print_dims(predictors, target_vad)
 
+    print ('\nPREPROCESSING COMPLETED')
+
 
 
 
