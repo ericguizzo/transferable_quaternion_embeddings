@@ -1,5 +1,5 @@
-# Transferable Quaternion Embeddings for Speech Emotion Recognition
-This repository supports the [paper](arxiv_link) "Transferable Quaternion Embeddings for Speech Emotion Recognition" submitted to IEEE Transactions of Audio, Speech and Language processing. Here you can find easy instructions for the download of the required data  and our pre-trained weights, for training from scratch R2Hemo on Iemocap and for the application of our approach to a generic speech emotion recognition dataset.
+# Learning Speech Emotion Representations in the Quaternion Domain
+This repository supports the [paper](https://arxiv.org/abs/2204.02385) "Learning Speech Emotion Representations in the Quaternion Domain" submitted to IEEE Transactions of Audio, Speech and Language processing. Here you can find easy instructions for the download of the required data  and our pre-trained weights, for training from scratch R2Hemo on Iemocap and for the application of our approach to a generic speech emotion recognition dataset.
 
 
 ## Installation
