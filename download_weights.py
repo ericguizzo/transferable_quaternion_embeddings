@@ -48,7 +48,7 @@ if __name__ == "__main__":
     parser.add_argument('--output_path', type=str, default="models")
     args = parser.parse_args()
 
-    file_id = '1vCX0KHW44Q9plKTdkgyKZRcyjfgVA7jX'
+    file_id = 'd/1vCX0KHW44Q9plKTdkgyKZRcyjfgVA7jX'
 
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
