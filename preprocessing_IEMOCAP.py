@@ -22,7 +22,7 @@ INPUT_IEMOCAP_FOLDER = cfg.get('preprocessing', 'input_iemocap_folder')
 OUTPUT_FOLDER = cfg.get('preprocessing', 'output_folder')
 FIXED_SEED = cfg.getint('sampling', 'fixed_seed')
 
-if FIXED_SEED is not None:
+if FIXED_SEED is not 0:
     # Set seed
     manualSeed = FIXED_SEED
     random.seed(manualSeed)
