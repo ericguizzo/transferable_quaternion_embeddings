@@ -222,9 +222,7 @@ def main():
         max_file_length = 1
     else:
         max_file_length=get_max_length_IEMOCAP(sounds_list)  #get longest file in samples
-
-
-
+    print (sounds_list)
 
     predictors_save_path_completeVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_completeVAD' + '_predictors.npy')
     target_save_path_completeVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_completeVAD'  + '_target.npy')
@@ -234,10 +232,11 @@ def main():
     target_save_path_classification = os.path.join(OUTPUT_FOLDER, 'iemocap_classification'  + '_target.npy')
 
     print ('\nPreprocessing files: Complete VAD')
-    label_to_int = label_to_int_complete
+    #label_to_int = label_to_int_complete
 
     sounds_list = filter_labels(sounds_list)
     index = 1  #index for progress bar
+    print ("N sounds: ", len(sounds_list))
     num_files = len(sounds_list)
     predictors = {}
     target = {}
@@ -255,7 +254,7 @@ def main():
     np.save(predictors_save_path_completeVAD, predictors)
     np.save(target_save_path_completeVAD, target)
     print_dims(predictors, target)
-
+    '''
     print ('\nPreprocessing files: Filtered VAD')
     label_to_int = label_to_int_filtered
     sounds_list = filter_labels(sounds_list)  #filter only sounds of certain labels !!!!!
@@ -280,7 +279,7 @@ def main():
 
 
     sounds_list = filter_labels(sounds_list)  #filter only sounds of certain labels
-
+    '''
 
 
 
