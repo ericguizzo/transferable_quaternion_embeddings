@@ -130,7 +130,7 @@ def get_label_IEMOCAP_classification(wavname):
 
     #change this to have only 4 labels!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    int_label = label_to_int[str_label]
+    int_label = label_to_int_filtered[str_label]
 
     if int_label != None:
         output = uf.onehot(int_label, num_classes_IEMOCAP)
