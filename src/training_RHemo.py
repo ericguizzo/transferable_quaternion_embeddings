@@ -105,7 +105,7 @@ args.shuffle_data = eval(args.shuffle_data)
 
 print ('Quat: ', args.model_quat, 'Class_quat: ', args.model_classifier_quat)
 
-if args.fixed_seed is not None
+if args.fixed_seed is not None:
     manualSeed = args.fixed_seed
     random.seed(manualSeed)
     torch.manual_seed(manualSeed)
