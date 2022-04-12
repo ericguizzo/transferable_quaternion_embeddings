@@ -44,7 +44,7 @@ print ('Features type: ' + str(FEATURES_TYPE))
 num_classes_IEMOCAP = 5
 
 
-label_to_int_filtered = {'neu':0,
+label_to_int = {'neu':0,
                 'ang':1,
                 'hap':2,
                 'exc':None,
@@ -66,7 +66,7 @@ label_to_int_complete = {'neu':0,
                 'dis':4,
                 'oth':4,
                 'xxx':4}
-label_to_int = {}
+#label_to_int = {}
 
 wavname = 'Ses01F_impro01_F001.wav'
 #wavname = 'Ses01M_script01_2_F003.wav'
