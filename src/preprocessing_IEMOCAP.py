@@ -79,7 +79,7 @@ label_to_int = {'neu':0,
                 'fea':6,
                 'sur':7,
                 'dis':8,
-                'oth':None,
+                'oth':9,
                 'xxx':None}
 '''
 wavname = 'Ses01F_impro01_F001.wav'

@@ -44,7 +44,7 @@ print ('Features type: ' + str(FEATURES_TYPE))
 num_classes_IEMOCAP = 5
 
 
-label_to_int = {'neu':0,
+label_to_int_filtered = {'neu':0,
                 'ang':1,
                 'hap':2,
                 'exc':None,
@@ -55,8 +55,7 @@ label_to_int = {'neu':0,
                 'dis':None,
                 'oth':None,
                 'xxx':None}
-'''
-label_to_int = {'neu':0,
+label_to_int_complete = {'neu':0,
                 'ang':1,
                 'hap':2,
                 'exc':4,
@@ -69,19 +68,6 @@ label_to_int = {'neu':0,
                 'xxx':4}
 
 
-
-label_to_int = {'neu':0,
-                'ang':1,
-                'hap':2,
-                'exc':3,
-                'sad':4,
-                'fru':5,
-                'fea':6,
-                'sur':7,
-                'dis':8,
-                'oth':None,
-                'xxx':None}
-'''
 wavname = 'Ses01F_impro01_F001.wav'
 #wavname = 'Ses01M_script01_2_F003.wav'
 
@@ -144,7 +130,6 @@ def get_label_IEMOCAP_classification(wavname):
 
     #change this to have only 4 labels!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    #int_label = label_to_int[str_label]
     int_label = label_to_int[str_label]
 
     if int_label != None:
@@ -203,59 +188,7 @@ def filter_actors_IEMOCAP(sounds_list, foldable_item):
 
     return curr_list
 
-def main():
-    '''
-    custom preprocessing routine for the iemocap dataset
-    '''
-    print ('')
-    print ('Setting up preprocessing...')
-    print('')
-    sounds_list = get_sounds_list(INPUT_IEMOCAP_FOLDER)  #get list of all soundfile paths
-
-    #change this to have only 4 labels
-    sounds_list = filter_labels(sounds_list)  #filter only sounds of certain labels
-
-    #filter non-wav files
-    sounds_list = list(filter(lambda x: x[-3:] == "wav", sounds_list))  #get only wav
-    random.shuffle(sounds_list)
-
-    if SEGMENTATION:
-        max_file_length = 1
-    else:
-        max_file_length=get_max_length_IEMOCAP(sounds_list)  #get longest file in samples
-
-    num_files = len(sounds_list)
-    #init predictors and target dicts
-    predictors = {}
-    target = {}
-    #create output paths for the npy matrices
-    appendix = '_' + FEATURES_TYPE
-    if AUGMENTATION:
-        predictors_save_path = os.path.join(OUTPUT_FOLDER, 'iemocap_randsplit' + appendix + '_aug' + str(NUM_AUG_SAMPLES) + '_predictors.npy')
-        target_save_path = os.path.join(OUTPUT_FOLDER, 'iemocap_randsplit' + appendix + '_aug' + str(NUM_AUG_SAMPLES) + '_target.npy')
-    else:
-        predictors_save_path = os.path.join(OUTPUT_FOLDER, 'iemocap_randsplit' + appendix + '_predictors.npy')
-        target_save_path = os.path.join(OUTPUT_FOLDER, 'iemocap_randsplit' + appendix + '_target.npy')
-    index = 1  #index for progress bar
-    print ('\nPreprocessing files')
-    for i in sounds_list:
-
-
-        curr_list = [i]
-        curr_predictors, curr_target = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP)
-        #append preprocessed predictors and target to the dict
-        if curr_predictors.shape[0] != 0:
-            predictors[i] = curr_predictors
-            target[i] = curr_target
-
-        uf.print_bar(index, num_files)
-        index +=1
-
-    #save dicts
-    print ('\nSaving matrices...')
-    np.save(predictors_save_path, predictors)
-    np.save(target_save_path, target)
-    #print dimensions
+def print_dims(predictors, target):
     count = 0
     predictors_dims = 0
     keys = list(predictors.keys())
@@ -269,6 +202,83 @@ def main():
     print ('Total number of datapoints: ' + str(count))
     print (' Predictors shape: ' + str(pred_shape))
     print (' Target shape: ' + str(tg_shape))
+
+
+def main():
+    '''
+    custom preprocessing routine for the iemocap dataset
+    '''
+    print ('')
+    print ('Setting up preprocessing...')
+    print('')
+
+
+    sounds_list = get_sounds_list(INPUT_IEMOCAP_FOLDER)  #get list of all soundfile paths
+    #filter non-wav files
+    sounds_list = list(filter(lambda x: x[-3:] == "wav", sounds_list))  #get only wav
+    random.shuffle(sounds_list)
+
+    if SEGMENTATION:
+        max_file_length = 1
+    else:
+        max_file_length=get_max_length_IEMOCAP(sounds_list)  #get longest file in samples
+
+
+
+
+    predictors_save_path_completeVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_completeVAD' + '_predictors.npy')
+    target_save_path_completeVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_completeVAD'  + '_target.npy')
+    predictors_save_path_filteredVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_filteredVAD' + '_predictors.npy')
+    target_save_path_filteredVAD = os.path.join(OUTPUT_FOLDER, 'iemocap_filteredVAD'  + '_target.npy')
+    predictors_save_path_classification = os.path.join(OUTPUT_FOLDER, 'iemocap_classification' + '_predictors.npy')
+    target_save_path_classification = os.path.join(OUTPUT_FOLDER, 'iemocap_classification'  + '_target.npy')
+
+    print ('\nPreprocessing files: Complete VAD')
+    label_to_int = label_to_int_complete
+    index = 1  #index for progress bar
+    num_files = len(sounds_list)
+    predictors = {}
+    target = {}
+    for i in sounds_list:
+        curr_list = [i]
+        curr_predictors, curr_target = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP)
+        #append preprocessed predictors and target to the dict
+        if curr_predictors.shape[0] != 0:
+            predictors[i] = curr_predictors
+            target[i] = curr_target
+        uf.print_bar(index, num_files)
+        index +=1
+    #save dicts
+    print ('\nSaving matrices...')
+    np.save(predictors_save_path_completeVAD, predictors)
+    np.save(target_save_path_completeVAD, target)
+    print_dims(predictors, target)
+
+    print ('\nPreprocessing files: Filtered VAD')
+    label_to_int = label_to_int_filtered
+    sounds_list = filter_labels(sounds_list)  #filter only sounds of certain labels !!!!!
+    num_files = len(sounds_list)
+    predictors = {}
+    target = {}
+    index = 1  #index for progress bar
+    for i in sounds_list:
+        curr_list = [i]
+        curr_predictors, curr_target = pre.preprocess_foldable_item(curr_list, max_file_length, get_label_IEMOCAP)
+        #append preprocessed predictors and target to the dict
+        if curr_predictors.shape[0] != 0:
+            predictors[i] = curr_predictors
+            target[i] = curr_target
+        uf.print_bar(index, num_files)
+        index +=1
+    #save dicts
+    print ('\nSaving matrices...')
+    np.save(predictors_save_path, predictors)
+    np.save(target_save_path, target)
+    print_dims(predictors, target)
+
+
+    sounds_list = filter_labels(sounds_list)  #filter only sounds of certain labels
+
 
 
 
