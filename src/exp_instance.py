@@ -217,7 +217,7 @@ def grid_search(experiments_folder, output_folder, ids, begin, end, gpu_id):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--experiments_folder', type=str, default='experiments_quat')
+    parser.add_argument('--experiments_folder', type=str, default='experiments')
     parser.add_argument('--output_folder', type=str, default='results')
     parser.add_argument('--ids', type=str, default='[1]')
     parser.add_argument('--first', type=int, default=1)
