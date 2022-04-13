@@ -14,7 +14,7 @@ pip install -r requirements.txt
 ## Data download and preprocessing
 * Follow these instructions to download the Iemocap dataset: https://sail.usc.edu/iemocap/
 * Put the path to the downloaded dataset in the *input_iemocap_folder* variable in the *preprocessing_config.ini* file.
-* Run the following scripts to pre-process the dataset:
+* Run the following command to pre-process the dataset:
 ```bash
 python3 preprocessing.py
 ```
@@ -31,10 +31,10 @@ If you use our pretrained weights skip the following section.
 ## RH-emo pretraining
 Once downloaded and preprocessed Iemocap it is possible to run the RH-emo pretraining from scratch with this command:
 ```bash
-python3 exp_instance.py --ids [1] --gpu_id 0
+python3 exp_instance.py --ids [1] --last 2 --gpu_id 0
 ```
 This script will run the training *training_RHemo.py* with our best hyperparameters, which are specified in the configuration file *experiments/1_RHemo_train_onlyrecon.txt*.
-Two consecutive trainings are launched: without and with the emotion classification term in the loss function, as explained in the paper. When the trainings finish, a metrics spreadsheet is saved in *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
+Two consecutive trainings are launched: without and with the emotion classification term in the loss function, as explained in the paper. When the trainings finish, a metrics spreadsheet is saved in the *results* folder. The results will match the ones exposed in the original paper.
 
 
 ## Method application
@@ -63,8 +63,8 @@ for e in epochs:
         optimizer.step()
 ```
 
-You can run our speech emotion recognition training on Iemocap with this line:
+You can run our speech emotion recognition training on Iemocap with this command:
 ```bash
-python3 exp_instance.py --ids [2] --gpu_id 0 --last 3
+python3 exp_instance.py --ids [2] --last 3 --gpu_id 0
 ```
-The script will launch 3 consecutive trainings using the quaternionAlexNet, ResNet50 and VGG16 with Iemocap and will return a metrics spreadsheet that can be fount at *path_to_spreadsheet*. The results will match the ones exposed in the original paper.
+The script will launch 3 consecutive trainings using the quaternion AlexNet, ResNet50 and VGG16 with Iemocap and will return a metrics spreadsheet that can be found in the *results* folder. The results will match the ones exposed in the original paper.

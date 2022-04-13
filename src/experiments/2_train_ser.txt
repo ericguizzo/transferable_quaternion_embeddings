@@ -8,7 +8,7 @@
         "target_path": "'path_to_target'",
         "num_experiment": 24,
         "num_folds": 1,
-        "num_epochs": 1,
+        "num_epochs": 500,
         "batch_size": 20,
         "fast_test": "False",
         "use_r2he":"True",
