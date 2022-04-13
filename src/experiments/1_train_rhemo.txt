@@ -35,7 +35,7 @@
         "patience": 30,
        "regularization_lambda":0.00001,
        "learning_rate": 0.000001,
-       "load_pretrained": "'results/experiment_1_R2Hemo_train_onlyrecon.txt/models/model_xval_iemocap_exp1_R2Hemo_train_onlyrecon.txt_run1_fold0'",
+       "load_pretrained": "'results/experiment_1_train_rhemo.txt/models/model_xval_iemocap_exp1_train_rhemo.txt_run1_fold0'",
        "loss_beta_vad":100
         }
 
