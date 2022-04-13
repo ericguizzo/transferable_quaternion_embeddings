@@ -6,7 +6,7 @@
         "dataset": "iemocap",
         "num_experiment": 1,
         "num_folds": 1,
-        "num_epochs": 200000,
+        "num_epochs": 1,
         "model_name": "simple_autoencoder_2_vad",
         "fast_test": "False",
         "save_model_metric": "total_loss",
